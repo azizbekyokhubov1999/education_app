@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:small_education_app/screens/course_details.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -228,7 +229,13 @@ class HomeScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               InkWell(
-                                onTap: (){},
+                                onTap: (){
+                                  Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) =>
+                                  CourseDetails()
+                                  ),
+                                  );
+                                },
                                 child: Container(
                                   height: screenHeight * 0.12,
                                   width: double.infinity,
