@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -70,6 +71,11 @@ class HomeScreen extends StatelessWidget {
         size: screenWidth * 0.07,
       ),
       Icon(
+        Icons.store,
+        color: Colors.white,
+        size: screenWidth * 0.07,
+      ),
+      Icon(
         Icons.video_camera_back_rounded,
         color: Colors.white,
         size: screenWidth * 0.07,
@@ -81,9 +87,236 @@ class HomeScreen extends StatelessWidget {
       ),
     ];
 
-    return Material(
+    return Container(
+      height: screenHeight,
+      width: screenWidth,
       color: Color(0xFFF8EFEA),
+      child: SafeArea(
+          child: Padding(
+              padding: EdgeInsets.only(
+                top: screenHeight * 0.02,
+                right: screenWidth * 0.03,
+                left: screenWidth * 0.03,
+              ),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Hello programmer",
+                      style: txtTheme.titleLarge?.copyWith(
+                        color: Color(0xFF5D4037),
+                        fontWeight: FontWeight.bold
+                      ),
+                      ),
+                      Icon(Icons.notifications_rounded,
+                      color: Color(0xFFFF6F00),
+                        size: screenWidth * 0.07,
+                      )
+                    ],
+                  ), // for starter text and bell icon
+                  SizedBox(height: screenHeight * 0.005),
+                  Row(
+                    children: [
+                      Text(
+                        "Choose your course\t",
+                        style: TextStyle(
+                          color: Colors.black45
+                        ),
+                      ),
+                      Text(
+                        "right way",
+                        style: TextStyle(
+                          color: Color(0xFFFF6F00)
+                        ),
+                      )
+                    ],
+                  ), // for 2 text in the row
+                  SizedBox(height: screenHeight * 0.03),
+                  Container(
+                    height: screenHeight * 0.06,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      color: Colors.black12.withOpacity(0.03),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Icon(Icons.search),
+                        border: InputBorder.none,
+                        labelText: "Search for your grades, course, training",
+                        labelStyle: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black45
+                        ),
+                      ),
+                    ),
+                  ), // container for search text field with prefix text
+                  SizedBox(height: screenHeight * 0.03),
+                  GridView.builder(
+                    shrinkWrap: true,
+                      itemCount: 6,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                        childAspectRatio: screenWidth / (screenHeight * 0.45),
+                      ),
+                      itemBuilder: (context, index) {
+                        return Column(
+                          children: [
+                            Container(
+                              height: screenWidth * 0.15,
+                              width: screenWidth * 0.15,
+                              decoration: BoxDecoration(
+                                color: BgColor[index],
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Center(
+                                child: iconList[index],
+                              ),
+                            ),
+                            SizedBox(height: screenHeight * 0.01),
+                            Text(containerList[index]),
+                          ],
+                        );
+                      }
+                  ), // grid view for overview about 6 services
+                  SizedBox(height: screenHeight * 0.02),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Recommended Courses",
+                        style: txtTheme.titleLarge?.copyWith(
+                          color: Color(0xFF5D4037),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        "See All ",
+                        style: TextStyle(
+                          color: Color(0xFFFF6F00),
+                        ),
+                      )
+                    ],
+                  ), // row of two text
+                  SizedBox(height: screenHeight * 0.02),
+                  SizedBox(
+                    height: screenHeight * 0.3,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 3,
+                        itemBuilder: (context, index)  {
+                        return Container(
+                          margin: EdgeInsets.symmetric(
+                            horizontal: screenWidth * 0.03,
+                            vertical: screenHeight * 0.01,
+                          ),
+                          height: screenHeight * 0.25,
+                          width: screenWidth * 0.4,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                blurRadius: 5,
+                                color:Colors.black12,
+                              )
+                            ],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              InkWell(
+                                onTap: (){},
+                                child: Container(
+                                  height: screenHeight * 0.12,
+                                  width: double.infinity,
+                                  padding: EdgeInsets.all(5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: CourseColor[index],
+                                  ),
+                                  child: Image.asset(
+                                    CourseImages[index],
+                                    height: screenHeight * 0.09,
+                                    width: screenWidth * 0.12,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: screenHeight * 0.01),
+                              Padding(
+                                  padding: EdgeInsets.all(8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      CourseTitle[index],
+                                      style: TextStyle(
+                                        color: Colors.black54,
+                                        fontWeight: FontWeight.bold
+                                      ),
+                                    ),
+                                    SizedBox(height: screenHeight * 0.01),
+                                    Text(
+                                      CourseRating[index],
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                        fontSize: screenHeight * 0.02,
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        RatingBar.builder(
+                                             initialRating: 3,
+                                            minRating: 1,
+                                            direction: Axis.horizontal,
+                                            allowHalfRating: true,
+                                            itemCount: 5,
+                                            itemSize: screenHeight * 0.02,
+                                            itemBuilder: (context, index) =>
+                                            Icon(
+                                              Icons.star,
+                                              color: Colors.amber,
+                                            ),
+                                            onRatingUpdate: (rating) {}
+                                        ),
+                                        Container(
+                                          height: screenHeight * 0.04,
+                                          width: screenHeight * 0.04,
+                                          decoration: BoxDecoration(
+                                            color: Colors.red,
+                                            borderRadius: BorderRadius.circular(30),
+                                          ),
+                                          child: Center(
+                                            child: Icon(
+                                              Icons.favorite,
+                                              color: Colors.white,
+                                              size: screenHeight * 0.02,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
 
+                                ),
+                              )
+                              
+                            ],
+                          ),
+                        ); // container for each item of list view
+                        }
+                    ), //for horizontal list view
+                  )
+
+                ],
+              ),
+            ),
+          ),
+      ),
     );
   }
 }
